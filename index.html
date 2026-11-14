@@ -86,16 +86,16 @@ nav a:hover::after{transform:scaleX(1)}
 .hero::after{width:480px;height:480px;right:-140px;bottom:-220px;background:radial-gradient(circle,rgba(163,230,53,.22),transparent 68%);animation:driftB 32s ease-in-out infinite alternate}
 .deco{animation:floaty 9s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(-50%)}50%{transform:translateY(calc(-50% - 10px))}}
-.contact{position:relative;overflow:hidden}
-.contact::before{width:480px;height:480px;left:-120px;top:-200px;background:radial-gradient(circle,rgba(79,70,229,.35),transparent 68%);animation:driftA 28s ease-in-out infinite alternate}
-.contact::after{width:420px;height:420px;right:-100px;bottom:-200px;background:radial-gradient(circle,rgba(163,230,53,.18),transparent 68%);animation:driftB 30s ease-in-out infinite alternate}
+.contact{position:relative;overflow:hidden;background:linear-gradient(180deg,#111827,#0B0F19)}
+.contact::before{width:480px;height:480px;left:-120px;top:-200px;background:radial-gradient(circle,rgba(79,70,229,.12),transparent 68%);animation:driftA 28s ease-in-out infinite alternate}
+.contact::after{width:420px;height:420px;right:-100px;bottom:-200px;background:radial-gradient(circle,rgba(163,230,53,.05),transparent 68%);animation:driftB 30s ease-in-out infinite alternate}
 .contact .in{position:relative;z-index:1}
 @keyframes driftA{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70px,50px,0) scale(1.12)}}
 @keyframes driftB{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-60px,-46px,0) scale(1.1)}}
-.pcard,.pr{background:rgba(255,255,255,.62);backdrop-filter:blur(14px) saturate(1.35);-webkit-backdrop-filter:blur(14px) saturate(1.35);border:1px solid rgba(229,231,235,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 10px 30px -18px rgba(17,24,39,.22);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
-.pr{border-radius:18px;padding:28px;border-top:2px solid var(--ink)}
+.pcard,.pr{background:linear-gradient(180deg,#fff,rgba(255,255,255,.88));backdrop-filter:blur(14px) saturate(1.35);-webkit-backdrop-filter:blur(14px) saturate(1.35);border:1px solid #D5D9E0;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(17,24,39,.06),0 14px 32px -14px rgba(17,24,39,.28);transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease)}
+.pr{border-radius:18px;padding:28px;position:relative;overflow:hidden}.pr::before{content:"";position:absolute;left:28px;top:0;width:44px;height:4px;border-radius:0 0 4px 4px;background:var(--ink)}.pr b{color:var(--ink)}
 .pr:hover,a.pcard:hover{transform:translateY(-4px);border-color:rgba(17,24,39,.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 22px 44px -20px rgba(17,24,39,.3)}
-.pcard.soon{background:rgba(247,247,245,.6)}
+.pcard.soon{background:linear-gradient(180deg,#F3F4F6,#EEF0F3);box-shadow:inset 0 1px 0 #fff,0 8px 22px -16px rgba(17,24,39,.2)}
 .go span{display:inline-block;transition:transform .3s var(--ease)}a.pcard:hover .go span{transform:translateX(5px)}
 .hero-in>*{animation:riseIn .85s var(--ease) both}
 .hero-in>*:nth-child(2){animation-delay:.1s}.hero-in>*:nth-child(3){animation-delay:.2s}
