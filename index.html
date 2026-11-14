@@ -182,7 +182,14 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
 .deco{width:620px;aspect-ratio:300/228;opacity:1;right:-60px;top:50%;translate:none;transform:translateY(-50%);animation:none;transition:none;-webkit-mask:url(assets/varlein-mark-white.svg) center/contain no-repeat;mask:url(assets/varlein-mark-white.svg) center/contain no-repeat;background:linear-gradient(105deg,rgba(255,255,255,.07) 40%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.07) 60%);background-size:300% 100%;background-position:100% 0;animation:sheen 9s ease-in-out infinite}
 @keyframes sheen{0%{background-position:100% 0}55%,100%{background-position:0% 0}}
 .hero-in{padding-bottom:96px}
-@media (max-width:900px){.deco{width:380px;right:-110px}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+@media (max-width:900px){.deco{width:380px;right:-110px}}.spot{position:relative}
+.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .55s var(--ease);background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),var(--glow,rgba(255,255,255,.12)),transparent 70%)}
+.spot.lit::after{opacity:1}
+.spot{--glow:rgba(17,24,39,.08)}a.pcard.spot{--glow:rgba(79,70,229,.14)}.band.dark .spot{--glow:rgba(255,255,255,.14)}
+/* hover no longer lights the whole card: only the cursor spotlight does */
+.pr:hover,a.pcard:hover{border-color:#D5D9E0;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(17,24,39,.06),0 14px 32px -14px rgba(17,24,39,.28)}
+.band.dark .pr:hover{border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 20px 40px -24px rgba(0,0,0,.7)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 @media (max-width:900px){nav{display:none}.deco{width:360px;right:-120px}}
 @media (max-width:720px){.bar{flex-wrap:nowrap;gap:10px}.logo{gap:9px}.logo img:first-child{height:30px;width:auto}.logo img:last-child{height:10px;width:auto}.bar .btn{padding:11px 16px;font-size:14px;white-space:nowrap}.hero h1{font-size:40px}.hero p{font-size:18px}h2{font-size:29px}.wrap{padding-left:18px;padding-right:18px}.hero-in{padding-top:56px;padding-bottom:64px}section{padding-top:64px}.contact{margin-top:64px;padding:56px 0}.pcard{padding:24px}}
 </style>
@@ -309,5 +316,22 @@ b.addEventListener('click',function(e){e.stopPropagation();set(!h.classList.cont
 h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
 document.addEventListener('click',function(e){if(!h.contains(e.target))set(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
+</script><script>
+/* soft spotlight that follows the cursor on cards */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var SEL = '.pcard, .pr';
+  document.querySelectorAll(SEL).forEach(function(c){
+    c.classList.add('spot');
+    var s = {x:0,y:0,tx:0,ty:0,raf:0};
+    function paint(){ c.style.setProperty('--mx', s.x+'px'); c.style.setProperty('--my', s.y+'px'); }
+    function tick(){ s.x += (s.tx-s.x)*.16; s.y += (s.ty-s.y)*.16; paint();
+      if(Math.abs(s.tx-s.x)>.4 || Math.abs(s.ty-s.y)>.4){ s.raf = requestAnimationFrame(tick); } else { s.raf = 0; } }
+    function pos(e){ var r = c.getBoundingClientRect(); s.tx = e.clientX - r.left; s.ty = e.clientY - r.top; }
+    c.addEventListener('pointerenter', function(e){ pos(e); s.x = s.tx; s.y = s.ty; paint(); c.classList.add('lit'); });
+    c.addEventListener('pointermove', function(e){ pos(e); if(!s.raf) s.raf = requestAnimationFrame(tick); });
+    c.addEventListener('pointerleave', function(){ c.classList.remove('lit'); });
+  });
+})();
 </script></body>
 </html>
