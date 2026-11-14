@@ -178,7 +178,11 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
 }@media (max-width:900px){header .bar{flex-wrap:nowrap;gap:8px}}
 @media (max-width:720px){header .logo{gap:8px}header .logo img:first-child{height:32px;width:auto}header .logo img:last-child{height:11px;width:auto}header .bar .btn{padding:9px 14px;font-size:13px;white-space:nowrap}.menu-btn{width:38px;height:38px}.menu-btn span{top:17px}}
 @media (max-width:420px){header .logo img:last-child{height:8px}header .logo img:first-child{height:28px}header .bar .btn{padding:9px 12px;font-size:12.5px}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+/* wreath: fixed in place, a soft light sweeps across it now and then */
+.deco{width:620px;aspect-ratio:300/228;opacity:1;right:-60px;top:50%;translate:none;transform:translateY(-50%);animation:none;transition:none;-webkit-mask:url(assets/varlein-mark-white.svg) center/contain no-repeat;mask:url(assets/varlein-mark-white.svg) center/contain no-repeat;background:linear-gradient(105deg,rgba(255,255,255,.07) 40%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.07) 60%);background-size:300% 100%;background-position:100% 0;animation:sheen 9s ease-in-out infinite}
+@keyframes sheen{0%{background-position:100% 0}55%,100%{background-position:0% 0}}
+.hero-in{padding-bottom:96px}
+@media (max-width:900px){.deco{width:380px;right:-110px}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 @media (max-width:900px){nav{display:none}.deco{width:360px;right:-120px}}
 @media (max-width:720px){.bar{flex-wrap:nowrap;gap:10px}.logo{gap:9px}.logo img:first-child{height:30px;width:auto}.logo img:last-child{height:10px;width:auto}.bar .btn{padding:11px 16px;font-size:14px;white-space:nowrap}.hero h1{font-size:40px}.hero p{font-size:18px}h2{font-size:29px}.wrap{padding-left:18px;padding-right:18px}.hero-in{padding-top:56px;padding-bottom:64px}section{padding-top:64px}.contact{margin-top:64px;padding:56px 0}.pcard{padding:24px}}
 </style>
@@ -205,18 +209,13 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
 <main id="top">
 
 <div class="hero">
-  <img class="deco" src="assets/varlein-mark-white.svg" alt="" aria-hidden="true">
+  <div class="deco" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <h1>Brands and products <span class="grad">built to last.</span></h1>
     <p>Varlein designs, builds and runs its own brands and products. We start with real problems and build things that work.</p>
     <div class="actions">
       <a class="btn" href="#products">See our products</a>
       <a class="btn btn-ghost" href="mailto:contact@varlein.com">Get in touch</a>
-    </div>
-    <div class="stats">
-      <div class="stat"><b>0</b><span>fake reviews. Ever.</span></div>
-      <div class="stat"><b>0</b><span>review gating or incentives</span></div>
-      <div class="stat"><b>1</b><span>product in early access, more coming</span></div>
     </div>
   </div>
 </div>
