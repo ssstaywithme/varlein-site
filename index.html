@@ -139,6 +139,30 @@ nav a.active{color:var(--ink)}nav a.active::after{transform:scaleX(1)}
 .hero-in>*:nth-child(4){animation-delay:.3s}
 @media (max-width:900px){.hero h1{font-size:60px}}
 @media (max-width:720px){.hero h1{font-size:42px}.hero p{font-size:18px}.hero-in{padding-top:112px;padding-bottom:48px}.stats{margin-top:44px}.stat b{font-size:40px}.band,section.band{padding:60px 0}header .bar{padding:6px 8px 6px 16px}header .btn{padding:10px 16px}}
+/* ---- Neutral palette for Varlein (black, white, gray). Colour appears only on the Uplein card. ---- */
+.hero{background:radial-gradient(1100px 560px at 12% 0%,rgba(255,255,255,.10),transparent 60%),radial-gradient(800px 480px at 100% 100%,rgba(255,255,255,.05),transparent 60%),#0B0B0C}
+.hero::before{background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%)}
+.hero::after{background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%)}
+.hero .grad{background:linear-gradient(95deg,#fff,#9CA3AF 90%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero .btn{box-shadow:0 10px 30px -10px rgba(255,255,255,.35)}.hero .btn:hover{box-shadow:0 18px 38px -12px rgba(255,255,255,.5)}
+.stat b{background:linear-gradient(95deg,#fff,#9CA3AF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.band.dark{background:linear-gradient(180deg,#0B0B0C,#111113)}
+.band.dark::before{background:radial-gradient(circle,rgba(255,255,255,.08),transparent 68%)}
+.band.dark .eyebrow{color:#9CA3AF}
+.band.dark .pr::before{background:linear-gradient(90deg,#fff,#6B7280)}
+.band.dark .pr:hover{border-color:rgba(255,255,255,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 26px 50px -24px rgba(0,0,0,.8)}
+.contact::before{background:radial-gradient(circle,rgba(255,255,255,.07),transparent 68%)}
+.contact::after{background:radial-gradient(circle,rgba(255,255,255,.04),transparent 68%)}
+footer{background:#0B0B0C}
+a.pcard{position:relative;overflow:hidden}
+a.pcard::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#4F46E5,#A3E635)}
+a.pcard:hover{border-color:rgba(79,70,229,.5);box-shadow:inset 0 1px 0 #fff,0 24px 48px -20px rgba(79,70,229,.45)}
+/* smooth hand-over between sections: each band starts with a soft fade from the colour above it */
+#products{background:linear-gradient(180deg,#0B0B0C,rgba(11,11,12,0) 130px),#F3F4F6;padding-top:150px}
+#approach{background:linear-gradient(180deg,#F3F4F6,rgba(243,244,246,0) 130px),linear-gradient(180deg,#0B0B0C,#111113);padding-top:150px}
+#about{background:linear-gradient(180deg,#111113,rgba(17,17,19,0) 130px),#fff;padding:150px 0 96px}
+.contact{background:linear-gradient(180deg,#fff,rgba(255,255,255,0) 130px),#0B0B0C;margin-top:0;padding:150px 0 84px}
+@media (max-width:720px){#products,#approach{padding-top:110px}#about{padding:110px 0 60px}.contact{padding:110px 0 56px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 @media (max-width:900px){nav{display:none}.deco{width:360px;right:-120px}}
 @media (max-width:720px){.bar{flex-wrap:nowrap;gap:10px}.logo{gap:9px}.logo img:first-child{height:30px;width:auto}.logo img:last-child{height:10px;width:auto}.bar .btn{padding:11px 16px;font-size:14px;white-space:nowrap}.hero h1{font-size:40px}.hero p{font-size:18px}h2{font-size:29px}.wrap{padding-left:18px;padding-right:18px}.hero-in{padding-top:56px;padding-bottom:64px}section{padding-top:64px}.contact{margin-top:64px;padding:56px 0}.pcard{padding:24px}}
@@ -213,7 +237,7 @@ nav a.active{color:var(--ink)}nav a.active::after{transform:scaleX(1)}
   </div>
 </div></section>
 
-<section id="about" class="wrap">
+<section id="about" class="band"><div class="wrap">
   <div class="about">
     <div class="l"><p class="eyebrow">About</p><h2>Who we are.</h2></div>
     <div class="r">
@@ -221,7 +245,7 @@ nav a.active{color:var(--ink)}nav a.active::after{transform:scaleX(1)}
       <p>Our first product, Uplein, helps local service businesses earn the reviews they deserve. More will follow.</p>
     </div>
   </div>
-</section>
+</div></section>
 
 </main>
 
