@@ -189,7 +189,22 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
 /* hover no longer lights the whole card: only the cursor spotlight does */
 .pr:hover,a.pcard:hover{border-color:#D5D9E0;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(17,24,39,.06),0 14px 32px -14px rgba(17,24,39,.28)}
 .band.dark .pr:hover{border-color:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 20px 40px -24px rgba(0,0,0,.7)}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+/* ---- Contact dialog ---- */
+.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+dialog#contactDialog{border:0;padding:0;border-radius:22px;width:min(440px,calc(100% - 28px));background:#fff;color:var(--ink);box-shadow:0 40px 90px -20px rgba(0,0,0,.6);opacity:0;transform:translateY(14px) scale(.98);transition:opacity .3s var(--ease),transform .3s var(--ease),overlay .3s allow-discrete,display .3s allow-discrete}
+dialog#contactDialog[open]{opacity:1;transform:none}
+@starting-style{dialog#contactDialog[open]{opacity:0;transform:translateY(14px) scale(.98)}}
+dialog#contactDialog::backdrop{background:rgba(8,8,10,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#contactForm{position:relative;display:grid;gap:14px;padding:28px}
+#contactForm h3{margin:0;font-size:24px;letter-spacing:-.01em}
+.cd-sub{margin:-6px 0 4px;color:var(--muted);font-size:15px}
+#contactForm label{display:grid;gap:6px;font-size:14px;font-weight:600}
+#contactForm input:not(.hp),#contactForm textarea{font:500 15px Inter,sans-serif;padding:12px 14px;border:1px solid var(--line2);border-radius:10px;color:var(--ink);background:#fff;width:100%;transition:border-color .2s,box-shadow .2s}
+#contactForm input:focus,#contactForm textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px rgba(17,24,39,.1)}
+#contactForm small{color:var(--muted);font-size:12.5px}
+.cd-x{position:absolute;right:14px;top:12px;width:34px;height:34px;border-radius:50%;border:0;background:#F3F4F6;font-size:22px;line-height:1;cursor:pointer;color:var(--ink)}
+.cd-x:hover{background:#E5E7EB}
+#contactForm .btn:disabled{opacity:.6;cursor:default;transform:none}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 @media (max-width:900px){nav{display:none}.deco{width:360px;right:-120px}}
 @media (max-width:720px){.bar{flex-wrap:nowrap;gap:10px}.logo{gap:9px}.logo img:first-child{height:30px;width:auto}.logo img:last-child{height:10px;width:auto}.bar .btn{padding:11px 16px;font-size:14px;white-space:nowrap}.hero h1{font-size:40px}.hero p{font-size:18px}h2{font-size:29px}.wrap{padding-left:18px;padding-right:18px}.hero-in{padding-top:56px;padding-bottom:64px}section{padding-top:64px}.contact{margin-top:64px;padding:56px 0}.pcard{padding:24px}}
 </style>
@@ -208,7 +223,7 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="btn" href="mailto:contact@varlein.com">Get in touch</a>
+    <a class="btn js-contact" href="mailto:contact@varlein.com">Get in touch</a>
     <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
   </div>
 </header>
@@ -222,7 +237,7 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
     <p>We build and run our own brands and products, starting with real problems.</p>
     <div class="actions">
       <a class="btn" href="#products">See our products</a>
-      <a class="btn btn-ghost" href="mailto:contact@varlein.com">Get in touch</a>
+      <a class="btn btn-ghost js-contact" href="mailto:contact@varlein.com">Get in touch</a>
     </div>
   </div>
 </div>
@@ -244,7 +259,7 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
     <div class="pcard soon">
       <h3>More on the way.</h3>
       <p>More products and brands are coming. Want to hear first? Write to us.</p>
-      <a class="go" href="mailto:contact@varlein.com">contact@varlein.com</a>
+      <a class="go js-contact" href="mailto:contact@varlein.com">Write to us <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </div></section>
@@ -273,11 +288,24 @@ header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:ho
 
 <div id="contact" class="contact">
   <div class="wrap in" style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
-    <div><h2>Let us talk.</h2><p class="sub">Questions, partnerships or press? We read every message.</p></div>
-    <a class="btn btn-light" href="mailto:contact@varlein.com" style="font-size:17px;padding:16px 30px">contact@varlein.com</a>
+    <div><h2>Let us talk.</h2><p class="sub">Questions, partnerships or press? We read every message. Or write to contact@varlein.com.</p></div>
+    <a class="btn btn-light js-contact" href="mailto:contact@varlein.com" style="font-size:17px;padding:16px 30px">Send us a message</a>
   </div>
 </div>
 
+<dialog id="contactDialog" aria-labelledby="cdTitle">
+  <form id="contactForm" novalidate>
+    <button type="button" class="cd-x" aria-label="Close" data-close>&times;</button>
+    <h3 id="cdTitle">Get in touch</h3>
+    <p class="cd-sub">Questions, partnerships or press. We read every message.</p>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <label>Your name<input name="name" autocomplete="name" required></label>
+    <label>Email<input name="email" type="email" autocomplete="email" required></label>
+    <label>Message<textarea name="message" rows="4" required></textarea></label>
+    <button type="submit" class="btn">Send message</button>
+    <small id="cdNote">Or write to contact@varlein.com.</small>
+  </form>
+</dialog>
 <footer>
   <div class="wrap foot">
     <a class="logo" href="#top" aria-label="Varlein home"><img src="assets/varlein-mark-white.svg" alt="" height="34"><img src="assets/varlein-wordmark-white.svg" alt="Varlein" height="12"></a>
@@ -331,6 +359,35 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);}
     c.addEventListener('pointerenter', function(e){ pos(e); s.x = s.tx; s.y = s.ty; paint(); c.classList.add('lit'); });
     c.addEventListener('pointermove', function(e){ pos(e); if(!s.raf) s.raf = requestAnimationFrame(tick); });
     c.addEventListener('pointerleave', function(){ c.classList.remove('lit'); });
+  });
+})();
+</script><script>
+/* contact dialog: sends the message to our server (no email app needed) */
+(function(){
+  var dlg = document.getElementById('contactDialog'), form = document.getElementById('contactForm');
+  if(!dlg || !form || typeof dlg.showModal !== 'function') return;
+  var note = document.getElementById('cdNote'), btn = form.querySelector('button[type=submit]');
+  var api = (location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://uplein-app.vercel.app') + '/api/lead';
+  var fresh = form.innerHTML;
+  function openIt(e){ e.preventDefault(); if(!dlg.open){ if(form.dataset.done){ form.innerHTML = fresh; delete form.dataset.done; note = document.getElementById('cdNote'); btn = form.querySelector('button[type=submit]'); } dlg.showModal(); var f = form.querySelector('input[name=name]'); if(f) f.focus(); } }
+  document.querySelectorAll('.js-contact').forEach(function(a){ a.addEventListener('click', openIt); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg || (e.target.closest && e.target.closest('[data-close]'))) dlg.close(); });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var d = new FormData(form), name = (d.get('name')||'').toString().trim(), email = (d.get('email')||'').toString().trim(), msg = (d.get('message')||'').toString().trim();
+    if(!name || !/^\S+@\S+\.\S+$/.test(email) || msg.length < 5){ note.style.color = '#B91C1C'; note.textContent = 'Please enter your name, a valid email and a short message.'; return; }
+    var label = btn.textContent; btn.disabled = true; btn.textContent = 'Sending...'; note.style.color = ''; note.textContent = '';
+    var ctl = new AbortController(), timer = setTimeout(function(){ ctl.abort(); }, 15000);
+    fetch(api, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({source:'varlein', name:name, email:email, message:msg, website:(d.get('website')||'').toString()}), signal:ctl.signal})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, body:j}; }); })
+      .then(function(res){
+        if(res.ok){
+          form.dataset.done = '1';
+          form.innerHTML = '<button type="button" class="cd-x" aria-label="Close" data-close>&times;</button><div style="text-align:center;padding:18px 4px 8px"><div style="width:52px;height:52px;border-radius:50%;background:#111827;margin:0 auto 16px;display:flex;align-items:center;justify-content:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17L4 12"/></svg></div><h3 style="margin:0 0 8px">Thank you!</h3><p style="margin:0;color:#4B5563">We got your message and will reply soon.</p></div>';
+        } else { btn.disabled = false; btn.textContent = label; note.style.color = '#B91C1C'; note.textContent = (res.body && res.body.error) ? res.body.error : 'We could not send your message. Please email contact@varlein.com.'; }
+      })
+      .catch(function(){ btn.disabled = false; btn.textContent = label; note.style.color = '#B91C1C'; note.textContent = 'We could not send your message. Please check your connection, or email contact@varlein.com.'; })
+      .then(function(){ clearTimeout(timer); });
   });
 })();
 </script></body>
