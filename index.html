@@ -164,7 +164,21 @@ a.pcard:hover{border-color:rgba(79,70,229,.5);box-shadow:inset 0 1px 0 #fff,0 24
 #approach{background:linear-gradient(180deg,#0B0B0C,#111113);padding:96px 0 136px}
 #about{background:#fff;padding:96px 0 136px}
 .contact{background:#0B0B0C;padding:96px 0 84px}
-@media (max-width:720px){.hero-in{padding-bottom:84px}#products,#approach,#about{padding:64px 0 100px}.contact{padding:64px 0 56px}#products,#approach,#about,.contact{border-radius:26px 26px 0 0;margin-top:-26px}}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
+@media (max-width:720px){.hero-in{padding-bottom:84px}#products,#approach,#about{padding:64px 0 100px}.contact{padding:64px 0 56px}#products,#approach,#about,.contact{border-radius:26px 26px 0 0;margin-top:-26px}}/* ---- Mobile menu ---- */
+.menu-btn{display:none;width:42px;height:42px;border-radius:999px;border:1px solid rgba(17,24,39,.15);background:rgba(255,255,255,.7);cursor:pointer;padding:0;position:relative;flex:none}
+.menu-btn span,.menu-btn span::before,.menu-btn span::after{position:absolute;left:12px;width:16px;height:2px;border-radius:2px;background:#111827;transition:transform .3s,top .3s,opacity .2s}
+.menu-btn span{top:19px}.menu-btn span::before,.menu-btn span::after{content:"";left:0}.menu-btn span::before{top:-5px}.menu-btn span::after{top:5px}
+header.open .menu-btn span{background:transparent}header.open .menu-btn span::before{top:0;transform:rotate(45deg)}header.open .menu-btn span::after{top:0;transform:rotate(-45deg)}
+@media (max-width:900px){
+.menu-btn{display:block}
+header .bar .btn{margin-left:auto}
+header nav{display:flex;position:absolute;top:calc(100% + 10px);left:0;right:0;flex-direction:column;gap:4px;padding:14px;border-radius:24px;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(17,24,39,.1);box-shadow:0 24px 50px -20px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility .25s}
+header.open nav{opacity:1;visibility:visible;transform:none}
+header nav a{padding:12px 14px;font-size:17px;border-radius:12px}header nav a:hover{background:#F3F4F6}header nav a::after{display:none}
+}@media (max-width:900px){header .bar{flex-wrap:nowrap;gap:8px}}
+@media (max-width:720px){header .logo{gap:8px}header .logo img:first-child{height:32px;width:auto}header .logo img:last-child{height:11px;width:auto}header .bar .btn{padding:9px 14px;font-size:13px;white-space:nowrap}.menu-btn{width:38px;height:38px}.menu-btn span{top:17px}}
+@media (max-width:420px){header .logo img:last-child{height:8px}header .logo img:first-child{height:28px}header .bar .btn{padding:9px 12px;font-size:12.5px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none}}
 @media (max-width:900px){nav{display:none}.deco{width:360px;right:-120px}}
 @media (max-width:720px){.bar{flex-wrap:nowrap;gap:10px}.logo{gap:9px}.logo img:first-child{height:30px;width:auto}.logo img:last-child{height:10px;width:auto}.bar .btn{padding:11px 16px;font-size:14px;white-space:nowrap}.hero h1{font-size:40px}.hero p{font-size:18px}h2{font-size:29px}.wrap{padding-left:18px;padding-right:18px}.hero-in{padding-top:56px;padding-bottom:64px}section{padding-top:64px}.contact{margin-top:64px;padding:56px 0}.pcard{padding:24px}}
 </style>
@@ -184,6 +198,7 @@ a.pcard:hover{border-color:rgba(79,70,229,.5);box-shadow:inset 0 1px 0 #fff,0 24
       <a href="#contact">Contact</a>
     </nav>
     <a class="btn" href="mailto:contact@varlein.com">Get in touch</a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span></button>
   </div>
 </header>
 
@@ -288,5 +303,12 @@ document.getElementById('year').textContent = new Date().getFullYear();
   ['.products>*','.principles>*','.about .r p','.contact .in > a'].forEach(function(sel){ document.querySelectorAll(sel).forEach(function(el, i){ mark(el, Math.min(i,5)*0.1); }); });
 })();
 </script>
-</body>
+<script>
+(function(){var h=document.querySelector('header'),b=document.querySelector('.menu-btn');if(!h||!b)return;
+function set(o){h.classList.toggle('open',o);b.setAttribute('aria-expanded',o?'true':'false');}
+b.addEventListener('click',function(e){e.stopPropagation();set(!h.classList.contains('open'));});
+h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+document.addEventListener('click',function(e){if(!h.contains(e.target))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
+</script></body>
 </html>
